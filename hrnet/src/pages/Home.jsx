@@ -1,54 +1,76 @@
 import { Link } from 'react-router-dom'
+import StateSelector from '../../components/StateSelector.jsx'
 
-export default function Home() {
+export default function Home () {
+
+    const saveEmployee = (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+
+        const data = {
+            firstName: formData.get('first-name'),
+            lastName: formData.get('last-name'),
+            dateOfBirth: formData.get('date-of-birth'),
+            startDate: formData.get('start-date'),
+            address: {
+                street: formData.get('street'),
+                city: formData.get('city'),
+                state: formData.get('state'),
+                zipCode: formData.get('zip-code')
+            },
+        }
+        console.log(data)
+        alert('Employee Created! - See console for details')
+    }
+
     return <>
+
         <div className="title">
             <h1>HRnet</h1>
         </div>
+
         <div className="container">
             <Link to="/employee-list">View Current Employees</Link>
             <h2>Create Employee</h2>
-            <form action="#" id="create-employee">
+            <form onSubmit={saveEmployee} id="create-employee">
                 <label htmlFor="first-name">First Name</label>
-                <input type="text" id="first-name" />
+                <input type="text" id="first-name" name="first-name"/>
 
                 <label htmlFor="last-name">Last Name</label>
-                <input type="text" id="last-name" />
+                <input type="text" id="last-name" name="last-name"/>
 
                 <label htmlFor="date-of-birth">Date of Birth</label>
-                <input id="date-of-birth" type="date" />
+                <input id="date-of-birth" name="date-of-birth" type="date"/>
 
                 <label htmlFor="start-date">Start Date</label>
-                <input id="start-date" type="date" />
+                <input id="start-date" name="start-date" type="date"/>
 
                 <fieldset className="address">
                     <legend>Address</legend>
 
                     <label htmlFor="street">Street</label>
-                    <input id="street" type="text" />
+                    <input id="street" name="street" type="text"/>
 
                     <label htmlFor="city">City</label>
-                    <input id="city" type="text" />
+                    <input id="city" name="city" type="text"/>
 
-                    <label htmlFor="state">State</label>
-                    <select name="state" id="state"></select>
+                    <StateSelector/>
 
                     <label htmlFor="zip-code">Zip Code</label>
-                    <input id="zip-code" type="number" />
+                    <input id="zip-code" name="zip-code" type="number"/>
                 </fieldset>
 
-                        <label htmlFor="department">Department</label>
-                        <select name="department" id="department">
-                            <option>Sales</option>
-                            <option>Marketing</option>
-                            <option>Engineering</option>
-                            <option>Human Resources</option>
-                            <option>Legal</option>
-                        </select>
-            </form>
+                <label htmlFor="department">Department</label>
+                <select name="department" id="department">
+                    <option>Sales</option>
+                    <option>Marketing</option>
+                    <option>Engineering</option>
+                    <option>Human Resources</option>
+                    <option>Legal</option>
+                </select>
 
-            {/*<button onclick="saveEmployee()">Save</button>*/}
+                <button type="submit">Save</button>
+            </form>
         </div>
-        {/*<div id="confirmation" className="modal">Employee Created!</div>*/}
-    </>;
+    </>
 }
