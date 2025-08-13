@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 import StateSelector from '../../components/StateSelector.jsx'
+import { useDispatch } from 'react-redux'
+import { addEmployee } from '../redux.js'
 
 export default function Home () {
+    const dispatch = useDispatch()
 
     const saveEmployee = (e) => {
         e.preventDefault()
@@ -12,14 +15,14 @@ export default function Home () {
             lastName: formData.get('last-name'),
             dateOfBirth: formData.get('date-of-birth'),
             startDate: formData.get('start-date'),
-            address: {
-                street: formData.get('street'),
-                city: formData.get('city'),
-                state: formData.get('state'),
-                zipCode: formData.get('zip-code')
-            },
+            department: formData.get('department'),
+            street: formData.get('street'),
+            city: formData.get('city'),
+            state: formData.get('state'),
+            zipCode: formData.get('zip-code')
         }
         console.log(data)
+        dispatch(addEmployee(data))
         alert('Employee Created! - See console for details')
     }
 
