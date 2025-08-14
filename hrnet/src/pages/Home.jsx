@@ -76,7 +76,10 @@ export default function Home () {
                     <option>Legal</option>
                 </select>
 
-                <button type="submit">Save</button>
+                <div className="save-button-wrapper">
+                    <button type="submit">Save</button>
+                </div>
+
             </form>
         </div>
         <Modal ref={modalRef}>Employee Created!</Modal>
