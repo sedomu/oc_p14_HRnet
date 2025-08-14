@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
-import StateSelector from '../../components/StateSelector.jsx'
+import StateSelector from '../components/StateSelector.jsx'
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../redux.js'
 import Modal from '../components/Modal.jsx'
 import { useRef } from 'react'
-import 'react-datepicker/dist/react-datepicker.css'
-import DateSelector from '../../components/DateSelector.jsx'
+import DateSelector from '../components/DateSelector.jsx'
 
 export default function Home () {
     const dispatch = useDispatch()

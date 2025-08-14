@@ -1,6 +1,7 @@
 import DatePicker from 'react-datepicker'
 import { getMonth, getYear } from 'date-fns'
 import { useState } from 'react'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default function DateSelector ({ name }) {
     const [selectedDate, setSelectedDate] = useState(null)
