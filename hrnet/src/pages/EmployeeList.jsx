@@ -31,7 +31,42 @@ export default function EmployeeList() {
             header: 'Last Name',
             accessorKey: 'lastName',
             enableSorting: true,
-        }
+        },
+        {
+            header: 'Start Date',
+            accessorKey: 'startDate',
+            enableSorting: true,
+        },
+        {
+            header: 'Department',
+            accessorKey: 'department',
+            enableSorting: true,
+        },
+        {
+            header: 'Date of Birth',
+            accessorKey: 'dateOfBirth',
+            enableSorting: true,
+        },
+        {
+            header: 'Street',
+            accessorKey: 'street',
+            enableSorting: true,
+        },
+        {
+            header: 'City',
+            accessorKey: 'city',
+            enableSorting: true,
+        },
+        {
+            header: 'State',
+            accessorKey: 'state',
+            enableSorting: true,
+        },
+        {
+            header: 'Zip Code',
+            accessorKey: 'zipCode',
+            enableSorting: true,
+        },
     ], [])
 
     // Configuration de la table
@@ -106,16 +141,17 @@ export default function EmployeeList() {
                             {headerGroup.headers.map(header => (
                                 <th
                                     key={header.id}
+                                    className={header.id}
                                     onClick={header.column.getToggleSortingHandler()}
                                     style={{ cursor: 'pointer' }}
                                 >
                                     {header.isPlaceholder ? null : (
                                         <>
-                                            {flexRender(header.column.columnDef.header, header.getContext())}
+                                            {flexRender(<div>{header.column.columnDef.header}</div>, header.getContext())}
                                             {{
-                                                asc: ' 🔼',
-                                                desc: ' 🔽',
-                                            }[header.column.getIsSorted()] ?? null}
+                                                asc: <div className="sorting-flag"><img src="sort_asc.svg" alt="Ascending sort icon"/> </div>,
+                                                desc: <div className="sorting-flag"><img src="sort_desc.svg" alt="Descending sort icon"/></div>,
+                                            }[header.column.getIsSorted()] ?? <div className="sorting-flag"><img src="sort_both.svg" alt="Unused sorting icon"/></div>}
                                         </>
                                     )}
                                 </th>

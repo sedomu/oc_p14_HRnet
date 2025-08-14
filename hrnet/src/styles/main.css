@@ -31,4 +31,62 @@ button.active {
   background: red;
 }
 
+table {
+  border-bottom: 1px solid #111;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+tr {
+  display: flex;
+  flex-direction: row;
+}
+
+th {
+  padding: 10px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+th > .sorting-flag {
+  width: 10px;
+  height: 10px;
+}
+
+.firstName {
+  width: 60px;
+}
+
+.lastName {
+  width: 56px;
+}
+
+.startDate {
+  width: 63px;
+}
+
+.department {
+  width: 83px;
+}
+
+.dateOfBirth {
+  width: 72px;
+}
+
+.street {
+  width: 71px;
+}
+
+.city {
+  width: 43px;
+}
+
+.state {
+  width: 35px;
+}
+
+.zipCode {
+  width: 49px;
+}
+
 /*# sourceMappingURL=main.css.map */
