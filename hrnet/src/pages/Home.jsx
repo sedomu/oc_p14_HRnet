@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux'
 import { addEmployee } from '../redux.js'
 import Modal from '../components/Modal.jsx'
 import { useRef } from 'react'
+import 'react-datepicker/dist/react-datepicker.css'
+import DateSelector from '../../components/DateSelector.jsx'
 
 export default function Home () {
     const dispatch = useDispatch()
@@ -47,10 +49,10 @@ export default function Home () {
                 <input type="text" id="last-name" name="last-name"/>
 
                 <label htmlFor="date-of-birth">Date of Birth</label>
-                <input id="date-of-birth" name="date-of-birth" type="date"/>
+                <DateSelector name="date-of-birth"/>
 
                 <label htmlFor="start-date">Start Date</label>
-                <input id="start-date" name="start-date" type="date"/>
+                <DateSelector name="start-date"/>
 
                 <fieldset className="address">
                     <legend>Address</legend>
