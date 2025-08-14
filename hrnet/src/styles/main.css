@@ -21,4 +21,8 @@ label {
   margin-top: 10px;
 }
 
+button.active {
+  background: red;
+}
+
 /*# sourceMappingURL=main.css.map */

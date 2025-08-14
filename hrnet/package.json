@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "sass": "npx sass --watch ./src/styles/scss/main.scss:./src/styles/main.css",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
