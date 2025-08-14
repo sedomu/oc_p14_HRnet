@@ -2,9 +2,13 @@ import { Link } from 'react-router-dom'
 import StateSelector from '../../components/StateSelector.jsx'
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../redux.js'
+import Modal from '../components/Modal.jsx'
+import { useRef } from 'react'
 
 export default function Home () {
     const dispatch = useDispatch()
+
+    const modalRef = useRef()
 
     const saveEmployee = (e) => {
         e.preventDefault()
@@ -21,9 +25,9 @@ export default function Home () {
             state: formData.get('state'),
             zipCode: formData.get('zip-code')
         }
-        console.log(data)
+
         dispatch(addEmployee(data))
-        alert('Employee Created! - See console for details')
+        modalRef.current.open()
     }
 
     return <>
@@ -75,5 +79,6 @@ export default function Home () {
                 <button type="submit">Save</button>
             </form>
         </div>
+        <Modal ref={modalRef}>Employee Created!</Modal>
     </>
 }

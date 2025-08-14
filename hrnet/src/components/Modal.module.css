@@ -1,0 +1,35 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    padding: 20px;
+    background-color: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.window {
+    vertical-align: middle;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    padding: 15px 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px black;
+}
+
+.close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -12.5px;
+    right: -12.5px;
+    border: none;
+    cursor: pointer;
+}
+
+.content{
+    display: inline-block;
+}
