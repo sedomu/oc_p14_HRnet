@@ -1,25 +1,35 @@
 import { GalleryVerticalEnd } from "lucide-react"
 
 import { Form } from "@/components/Form.tsx"
-import { DataTable } from "@/pages/EmployeeList.tsx";
-import {columns, type Employee} from "@/components/table/columns.tsx";
+import {EmployeesTable} from "@/components/testChaton.tsx";
 
 export default function LoginPage() {
 
 
-    const employees: Employee[] = [
-        {
-            firstName: "John",
-            lastName: "Doe",
-            dateOfBirth: "1990-01-01",
-            startDate: "2023-01-01",
-            street: "123 Main St",
-            city: "Anytown",
-            state: "CA",
-            zipCode: 12345,
-            department: "Engineering",
-        },
-    ]
+    // const employees: Employee[] = [
+    //     {
+    //         firstName: "John",
+    //         lastName: "Doe",
+    //         dateOfBirth: "1990-01-01",
+    //         startDate: "2023-01-01",
+    //         street: "123 Main St",
+    //         city: "Anytown",
+    //         state: "CA",
+    //         zipCode: 12345,
+    //         department: "Engineering",
+    //     },
+    //     {
+    //         firstName: "Seb",
+    //         lastName: "Seg",
+    //         dateOfBirth: "1994-12-12",
+    //         startDate: "2025-04-24",
+    //         street: "456 Second St",
+    //         city: "Everytown",
+    //         state: "ME",
+    //         zipCode: 54321,
+    //         department: "Legal",
+    //     },
+    // ]
 
     return (<>
         <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
@@ -32,7 +42,8 @@ export default function LoginPage() {
                 </a>
                 <Form />
             </div>
-            <DataTable columns={columns} data={employees} />
+            <EmployeesTable />
+
         </div>
 
 
