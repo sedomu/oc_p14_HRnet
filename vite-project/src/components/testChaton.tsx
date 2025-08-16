@@ -89,7 +89,7 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "firstName",
         header: ({ column }) => (
             <Button
-                variant="ghost"
+                variant={column.getIsSorted() ? "default" : "ghost"}
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 First Name
@@ -101,7 +101,7 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "lastName",
         header: ({ column }) => (
             <Button
-                variant="ghost"
+                variant={column.getIsSorted() ? "default" : "ghost"}
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Last Name
@@ -113,7 +113,7 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "dateOfBirth",
         header: ({ column }) => (
             <Button
-                variant="ghost"
+                variant={column.getIsSorted() ? "default" : "ghost"}
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Date of Birth
@@ -128,7 +128,7 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "startDate",
         header: ({ column }) => (
             <Button
-                variant="ghost"
+                variant={column.getIsSorted() ? "default" : "ghost"}
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Start Date
@@ -143,7 +143,7 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "department",
         header: ({ column }) => (
             <Button
-                variant="ghost"
+                variant={column.getIsSorted() ? "default" : "ghost"}
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Department
@@ -155,7 +155,7 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "city",
         header: ({ column }) => (
             <Button
-                variant="ghost"
+                variant={column.getIsSorted() ? "default" : "ghost"}
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 City
@@ -167,7 +167,7 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "state",
         header: ({ column }) => (
             <Button
-                variant="ghost"
+                variant={column.getIsSorted() ? "default" : "ghost"}
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 State
@@ -179,7 +179,7 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "zipCode",
         header: ({ column }) => (
             <Button
-                variant="ghost"
+                variant={column.getIsSorted() ? "default" : "ghost"}
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Zip
@@ -223,15 +223,11 @@ export function EmployeesTable() {
 
     return (
         <div className="w-full">
-            {/* Filtre global */}
+
+            <div className="flex items-center justify-between">
+            {/* Page size select */}
             <div className="flex items-center py-4 space-x-4">
-                <Input
-                    placeholder="Search employees..."
-                    value={globalFilter}
-                    onChange={(e) => setGlobalFilter(e.target.value)}
-                    className="max-w-sm"
-                />
-                {/* Page size select */}
+                <span>Show </span>
                 <Select
                     value={String(pageSize)}
                     onValueChange={(value) => table.setPageSize(Number(value))}
@@ -240,13 +236,26 @@ export function EmployeesTable() {
                         <SelectValue placeholder="Page size" />
                     </SelectTrigger>
                     <SelectContent>
-                        {[1, 10, 20, 50].map((n) => (
+                        {[1, 10, 25, 50, 100].map((n) => (
                             <SelectItem key={n} value={String(n)}>
                                 {n}
                             </SelectItem>
                         ))}
                     </SelectContent>
                 </Select>
+                <span> entries</span>
+            </div>
+
+
+            {/* Filtre global */}
+            <div className="flex items-center py-4 space-x-4">
+                <span>Search: </span>
+                <Input
+                    value={globalFilter}
+                    onChange={(e) => setGlobalFilter(e.target.value)}
+                    className="max-w-sm"
+                />
+            </div>
             </div>
 
             {/* Tableau */}
