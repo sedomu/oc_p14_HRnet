@@ -89,7 +89,8 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "firstName",
         header: ({ column }) => (
             <Button
-                variant={column.getIsSorted() ? "default" : "ghost"}
+                variant={"ghost"}
+                className="bg-transparent hover:bg-transparent hover:text-inherit"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 First Name
@@ -101,7 +102,8 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "lastName",
         header: ({ column }) => (
             <Button
-                variant={column.getIsSorted() ? "default" : "ghost"}
+                variant={"ghost"}
+                className="bg-transparent hover:bg-transparent hover:text-inherit"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Last Name
@@ -113,7 +115,8 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "dateOfBirth",
         header: ({ column }) => (
             <Button
-                variant={column.getIsSorted() ? "default" : "ghost"}
+                variant={"ghost"}
+                className="bg-transparent hover:bg-transparent hover:text-inherit"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Date of Birth
@@ -128,7 +131,8 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "startDate",
         header: ({ column }) => (
             <Button
-                variant={column.getIsSorted() ? "default" : "ghost"}
+                variant={"ghost"}
+                className="bg-transparent hover:bg-transparent hover:text-inherit"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Start Date
@@ -143,7 +147,8 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "department",
         header: ({ column }) => (
             <Button
-                variant={column.getIsSorted() ? "default" : "ghost"}
+                variant={"ghost"}
+                className="bg-transparent hover:bg-transparent hover:text-inherit"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Department
@@ -155,7 +160,8 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "city",
         header: ({ column }) => (
             <Button
-                variant={column.getIsSorted() ? "default" : "ghost"}
+                variant={"ghost"}
+                className="bg-transparent hover:bg-transparent hover:text-inherit"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 City
@@ -167,7 +173,8 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "state",
         header: ({ column }) => (
             <Button
-                variant={column.getIsSorted() ? "default" : "ghost"}
+                variant={"ghost"}
+                className="bg-transparent hover:bg-transparent hover:text-inherit"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 State
@@ -179,7 +186,8 @@ export const columns: ColumnDef<Employee>[] = [
         accessorKey: "zipCode",
         header: ({ column }) => (
             <Button
-                variant={column.getIsSorted() ? "default" : "ghost"}
+                variant={"ghost"}
+                className="bg-transparent hover:bg-transparent hover:text-inherit"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Zip
@@ -265,7 +273,8 @@ export function EmployeesTable() {
                         {table.getHeaderGroups().map((hg) => (
                             <TableRow key={hg.id}>
                                 {hg.headers.map((header) => (
-                                    <TableHead key={header.id}>
+                                    <TableHead key={header.id}
+                                               className={header.column.getIsSorted() ? "bg-foreground text-background" : ""}>
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(header.column.columnDef.header, header.getContext())}
