@@ -1,22 +1,26 @@
-import {useState} from "react";
+import {type ReactNode} from "react";
 import "./dialog.css";
 
+type DialogProps = {
+    visible: boolean;
+    onClose: () => void;
+    children?: ReactNode;
+};
 
-export default function Dialog(){
-    const [visible, setVisible] = useState(true)
+function Dialog({ visible, onClose, children = "tiny-react-dialog: children is missing" }: DialogProps){
 
     return <>
         {visible &&
-            <div className="tiny-react-dialog__overlay" onClick={() => setVisible(true)}>
+            <div className="tiny-react-dialog__overlay" onClick={onClose}>
                 <div className="tiny-react-dialog__container"  onClick={(e) => e.stopPropagation()}>
                     <div className="tiny-react-dialog__content">
-                        Employee Created!
+                        {children}
                     </div>
                     <button
                         className="tiny-react-dialog__close"
-                        onClick={() => setVisible(false)}>
+                        onClick={onClose}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                              className="lucide lucide-x-icon lucide-x">
                             <path d="M18 6 6 18"/>
                             <path d="m6 6 12 12"/>
@@ -27,3 +31,5 @@ export default function Dialog(){
         }
     </>
 }
+
+export default Dialog;
