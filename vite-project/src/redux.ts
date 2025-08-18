@@ -1,4 +1,6 @@
 import {configureStore, createSlice, type PayloadAction} from '@reduxjs/toolkit'
+import {MOCKUP_DATA} from "@/config.ts";
+import {employeesMockupData} from "@/data/employees_mockup.ts";
 
 export type Employee = {
     firstName: string
@@ -12,9 +14,15 @@ export type Employee = {
     department: string
 }
 
+const initialState: Employee[] = []
+
+if (MOCKUP_DATA){
+    initialState.push(...employeesMockupData);
+}
+
 const employeesSlice = createSlice({
     name: 'employees',
-    initialState: [] as Employee[],
+    initialState: initialState,
     reducers: {
         addEmployee: (state, action: PayloadAction<Employee>) => {
             state.push(action.payload)
