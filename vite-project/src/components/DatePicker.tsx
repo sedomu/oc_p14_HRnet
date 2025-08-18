@@ -12,7 +12,11 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
-export function DatePicker() {
+type DatePickerProps = {
+    name: string
+}
+
+export function DatePicker({name}: DatePickerProps) {
     const [open, setOpen] = React.useState(false)
     const [date, setDate] = React.useState<Date | undefined>(undefined)
 
@@ -42,7 +46,7 @@ export function DatePicker() {
                     />
                 </PopoverContent>
             </Popover>
-            <input type="hidden" name="dateOfBirth" value={date ? date.toLocaleDateString("en-US", {
+            <input type="hidden" name={name} value={date ? date.toLocaleDateString("en-US", {
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit'

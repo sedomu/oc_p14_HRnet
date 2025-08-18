@@ -18,7 +18,7 @@ export default function LoginPage() {
                     </div>
                     Health Wealth
                 </a>
-                <Form />
+                <Form onSuccess={() => setIsDialogVisible(true)}/>
             </div>
             <EmployeesTable />
 

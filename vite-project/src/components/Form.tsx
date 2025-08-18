@@ -11,11 +11,58 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {DatePicker} from "@/components/DatePicker.tsx";
 import {SelectState} from "@/components/SelectState.tsx";
+import type {FormEvent} from "react";
+import { useDispatch } from "react-redux";
+import {addEmployee, type Employee} from "@/redux.ts";
 
-export function Form({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+type formProps = {
+    className?: string;
+    onSuccess?: () => void;
+}
+
+function formDataToEmployee(formData: FormData): Employee | null {
+    const firstName = formData.get("firstName")?.toString();
+    const lastName = formData.get("lastName")?.toString();
+    const dateOfBirth = formData.get("dateOfBirth")?.toString();
+    const startDate = formData.get("startDate")?.toString();
+    const street = formData.get("street")?.toString();
+    const city = formData.get("city")?.toString();
+    const state = formData.get("state")?.toString();
+    const zipCodeStr = formData.get("zipCode")?.toString();
+    const department = formData.get("department")?.toString();
+
+    // Vérification des champs obligatoires
+    if (
+        !firstName ||
+        !lastName ||
+        !dateOfBirth ||
+        !startDate ||
+        !street ||
+        !city ||
+        !state ||
+        !zipCodeStr ||
+        !department
+    ) {
+        return null;
+    }
+
+    const zipCode = Number(zipCodeStr);
+    if (Number.isNaN(zipCode)) return null;
+
+    return {
+        firstName,
+        lastName,
+        dateOfBirth,
+        startDate,
+        street,
+        city,
+        state,
+        zipCode,
+        department,
+    };
+}
+
+export function Form({ className, onSuccess }: formProps) {
 
     const states = [
         {
@@ -276,17 +323,29 @@ export function Form({
             "name": "Legal",
             "key": "Legal"
         },
-    ]
+    ];
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-       e.preventDefault();
+    const dispatch = useDispatch();
 
-        const data = new FormData(e.currentTarget);
-        console.log(data);
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+
+        const data = formDataToEmployee(formData);
+
+        if (!data) {
+            console.error("Formulaire invalide");
+            return;
+        }
+
+        dispatch(addEmployee(data));
+
+        onSuccess?.();
     }
 
     return (
-        <div className={cn("flex flex-col gap-6", className)} {...props}>
+        <div className={cn("flex flex-col gap-6", className)}>
             <Card>
                 <CardHeader className="text-center">
                     <CardTitle className="text-xl">Welcome back</CardTitle>
@@ -321,11 +380,11 @@ export function Form({
                                 </div>
                                 <div className="grid gap-3">
                                     <Label htmlFor="dateOfBirth">Date of Birth</Label>
-                                    <DatePicker/>
+                                    <DatePicker name="dateOfBirth"/>
                                 </div>
                                 <div className="grid gap-3">
                                     <Label htmlFor="startDate">Start Date</Label>
-                                    <DatePicker/>
+                                    <DatePicker name="startDate" />
                                 </div>
                                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                                     <span className="bg-card text-muted-foreground relative z-10 px-2">

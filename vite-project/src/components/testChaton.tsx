@@ -33,18 +33,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-// ---- Dataset ----
-export type Employee = {
-    firstName: string
-    lastName: string
-    dateOfBirth: string
-    startDate: string
-    street: string
-    city: string
-    state: string
-    zipCode: number
-    department: string
-}
+import type {Employee} from "@/redux.ts";
 
 const employees: Employee[] = [
     {
@@ -72,7 +61,7 @@ const employees: Employee[] = [
 ]
 
 // ---- Sorting Icon ----
-const getSortingIcon = (column: Column<Employee, unknown>) => {
+const getSortingIcon = (column: Column<Employee>) => {
     switch (column.getIsSorted()) {
         case "asc":
             return <ArrowDown className="ml-2 h-4 w-4" />
