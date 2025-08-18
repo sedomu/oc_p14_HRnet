@@ -253,7 +253,8 @@ export function EmployeesTable() {
                             table.getRowModel().rows.map((row) => (
                                 <TableRow key={row.id}>
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id} className="bg-background text-foreground">
+                                        <TableCell key={cell.id}
+                                                   className="bg-background text-foreground">
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}

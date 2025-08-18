@@ -6,11 +6,7 @@ import {ChevronDownIcon} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {Calendar} from "@/components/ui/calendar"
 
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+import {Popover, PopoverContent, PopoverTrigger,} from "@/components/ui/popover"
 
 type DatePickerProps = {
     name: string
@@ -31,10 +27,11 @@ export function DatePicker({name}: DatePickerProps) {
                         className="w-full justify-between font-normal"
                     >
                         <span>{date ? date.toLocaleDateString() : ""}</span>
-                        <ChevronDownIcon />
+                        <ChevronDownIcon/>
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto overflow-hidden p-0" align="end">
+                <PopoverContent className="w-auto overflow-hidden p-0"
+                                align="end">
                     <Calendar
                         mode="single"
                         selected={date}
@@ -46,11 +43,12 @@ export function DatePicker({name}: DatePickerProps) {
                     />
                 </PopoverContent>
             </Popover>
-            <input type="hidden" name={name} value={date ? date.toLocaleDateString("en-US", {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit'
-            }) : ""}/>
+            <input type="hidden" name={name}
+                   value={date ? date.toLocaleDateString("en-US", {
+                       year: 'numeric',
+                       month: '2-digit',
+                       day: '2-digit'
+                   }) : ""}/>
         </>
 
     )

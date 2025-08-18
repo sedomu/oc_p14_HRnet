@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/card.tsx"
 import { Input } from "@/components/ui/input.tsx"
 import { Label } from "@/components/ui/label.tsx"
+import type {ComponentProps} from "react";
 
 export function LoginForm({
   className,
   ...props
-}: React.ComponentProps<"div">) {
+}: ComponentProps<"div">) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>

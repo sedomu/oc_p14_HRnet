@@ -19,12 +19,13 @@ export function ListSelect({name, options}: Props) {
     return (
         <Select name={name}>
             <SelectTrigger className="w-full">
-                <SelectValue placeholder="" />
+                <SelectValue placeholder=""/>
             </SelectTrigger>
             <SelectContent>
 
                 {options.map((option) => (
-                    <SelectItem value={option.key} key={option.key}>{option.name}</SelectItem>
+                    <SelectItem value={option.key}
+                                key={option.key}>{option.name}</SelectItem>
                 ))}
 
             </SelectContent>
