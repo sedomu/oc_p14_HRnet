@@ -14,7 +14,7 @@ type Props = {
     }[]
 }
 
-export function SelectState({name, options}: Props) {
+export function ListSelect({name, options}: Props) {
 
     return (
         <Select name={name}>

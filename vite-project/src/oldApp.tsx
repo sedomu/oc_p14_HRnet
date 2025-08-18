@@ -1,7 +1,7 @@
 import { GalleryVerticalEnd } from "lucide-react"
 
 import { Form } from "@/components/Form.tsx"
-import {EmployeesTable} from "@/components/testChaton.tsx";
+import {EmployeesTable} from "@/components/EmployeesTable.tsx";
 import Dialog from "@/components/Dialog/Dialog.tsx";
 import {useState} from "react";
 

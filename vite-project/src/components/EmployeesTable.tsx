@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import {
     type Column,
@@ -13,7 +11,7 @@ import {
     type SortingState,
     useReactTable,
 } from "@tanstack/react-table"
-import {ArrowUpDown, ArrowUp, ArrowDown} from "lucide-react"
+import {ArrowDown, ArrowUp, ArrowUpDown} from "lucide-react"
 
 import {Button} from "@/components/ui/button"
 import {Input} from "@/components/ui/input"
@@ -33,44 +31,18 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-import type {Employee} from "@/redux.ts";
+import type {Employee, RootState} from "@/redux.ts";
 import {useSelector} from "react-redux";
-import type {RootState} from "@/redux.ts"
-
-// const employees: Employee[] = [
-//     {
-//         firstName: "John",
-//         lastName: "Doe",
-//         dateOfBirth: "1990-01-01",
-//         startDate: "2023-01-01",
-//         street: "123 Main St",
-//         city: "Anytown",
-//         state: "CA",
-//         zipCode: 12345,
-//         department: "Engineering",
-//     },
-//     {
-//         firstName: "Seb",
-//         lastName: "Seg",
-//         dateOfBirth: "1994-12-12",
-//         startDate: "2025-04-24",
-//         street: "456 Second St",
-//         city: "Everytown",
-//         state: "ME",
-//         zipCode: 54321,
-//         department: "Legal",
-//     },
-// ]
 
 // ---- Sorting Icon ----
 const getSortingIcon = (column: Column<Employee>) => {
     switch (column.getIsSorted()) {
         case "asc":
-            return <ArrowDown className="ml-2 h-4 w-4" />
+            return <ArrowDown className="ml-2 h-4 w-4"/>
         case "desc":
-            return <ArrowUp className="ml-2 h-4 w-4" />
+            return <ArrowUp className="ml-2 h-4 w-4"/>
         default:
-            return <ArrowUpDown className="ml-2 h-4 w-4" />
+            return <ArrowUpDown className="ml-2 h-4 w-4"/>
     }
 }
 
@@ -78,7 +50,7 @@ const getSortingIcon = (column: Column<Employee>) => {
 export const columns: ColumnDef<Employee>[] = [
     {
         accessorKey: "firstName",
-        header: ({ column }) => (
+        header: ({column}) => (
             <Button
                 variant={"ghost"}
                 className="bg-transparent hover:bg-transparent hover:text-inherit"
@@ -91,7 +63,7 @@ export const columns: ColumnDef<Employee>[] = [
     },
     {
         accessorKey: "lastName",
-        header: ({ column }) => (
+        header: ({column}) => (
             <Button
                 variant={"ghost"}
                 className="bg-transparent hover:bg-transparent hover:text-inherit"
@@ -104,7 +76,7 @@ export const columns: ColumnDef<Employee>[] = [
     },
     {
         accessorKey: "dateOfBirth",
-        header: ({ column }) => (
+        header: ({column}) => (
             <Button
                 variant={"ghost"}
                 className="bg-transparent hover:bg-transparent hover:text-inherit"
@@ -114,13 +86,13 @@ export const columns: ColumnDef<Employee>[] = [
                 {getSortingIcon(column)}
             </Button>
         ),
-        cell: ({ row }) => (
+        cell: ({row}) => (
             <span>{new Date(row.getValue("dateOfBirth")).toLocaleDateString()}</span>
         ),
     },
     {
         accessorKey: "startDate",
-        header: ({ column }) => (
+        header: ({column}) => (
             <Button
                 variant={"ghost"}
                 className="bg-transparent hover:bg-transparent hover:text-inherit"
@@ -130,13 +102,13 @@ export const columns: ColumnDef<Employee>[] = [
                 {getSortingIcon(column)}
             </Button>
         ),
-        cell: ({ row }) => (
+        cell: ({row}) => (
             <span>{new Date(row.getValue("startDate")).toLocaleDateString()}</span>
         ),
     },
     {
         accessorKey: "department",
-        header: ({ column }) => (
+        header: ({column}) => (
             <Button
                 variant={"ghost"}
                 className="bg-transparent hover:bg-transparent hover:text-inherit"
@@ -149,7 +121,7 @@ export const columns: ColumnDef<Employee>[] = [
     },
     {
         accessorKey: "city",
-        header: ({ column }) => (
+        header: ({column}) => (
             <Button
                 variant={"ghost"}
                 className="bg-transparent hover:bg-transparent hover:text-inherit"
@@ -162,7 +134,7 @@ export const columns: ColumnDef<Employee>[] = [
     },
     {
         accessorKey: "state",
-        header: ({ column }) => (
+        header: ({column}) => (
             <Button
                 variant={"ghost"}
                 className="bg-transparent hover:bg-transparent hover:text-inherit"
@@ -175,7 +147,7 @@ export const columns: ColumnDef<Employee>[] = [
     },
     {
         accessorKey: "zipCode",
-        header: ({ column }) => (
+        header: ({column}) => (
             <Button
                 variant={"ghost"}
                 className="bg-transparent hover:bg-transparent hover:text-inherit"
@@ -206,7 +178,7 @@ export function EmployeesTable() {
     const table = useReactTable({
         data: employees,
         columns,
-        state: { sorting, globalFilter },
+        state: {sorting, globalFilter},
         onSortingChange: setSorting,
         onGlobalFilterChange: setGlobalFilter,
         globalFilterFn: globalContains,
@@ -216,7 +188,7 @@ export function EmployeesTable() {
         getSortedRowModel: getSortedRowModel(),
     })
 
-    const { pageIndex, pageSize } = table.getState().pagination
+    const {pageIndex, pageSize} = table.getState().pagination
     const pageStart = pageIndex * pageSize + 1
     const pageEnd = Math.min(pageStart + pageSize - 1, table.getFilteredRowModel().rows.length)
     const filteredCount = table.getFilteredRowModel().rows.length
@@ -226,37 +198,37 @@ export function EmployeesTable() {
         <div className="w-full">
 
             <div className="flex items-center justify-between">
-            {/* Page size select */}
-            <div className="flex items-center py-4 space-x-4">
-                <span>Show </span>
-                <Select
-                    value={String(pageSize)}
-                    onValueChange={(value) => table.setPageSize(Number(value))}
-                >
-                    <SelectTrigger className="w-20">
-                        <SelectValue placeholder="Page size" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {[1, 10, 25, 50, 100].map((n) => (
-                            <SelectItem key={n} value={String(n)}>
-                                {n}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-                <span> entries</span>
-            </div>
+                {/* Page size select */}
+                <div className="flex items-center py-4 space-x-4">
+                    <span>Show </span>
+                    <Select
+                        value={String(pageSize)}
+                        onValueChange={(value) => table.setPageSize(Number(value))}
+                    >
+                        <SelectTrigger className="w-20 bg-background">
+                            <SelectValue placeholder="Page size"/>
+                        </SelectTrigger>
+                        <SelectContent>
+                            {[10, 25, 50, 100].map((n) => (
+                                <SelectItem key={n} value={String(n)}>
+                                    {n}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <span> entries</span>
+                </div>
 
 
-            {/* Filtre global */}
-            <div className="flex items-center py-4 space-x-4">
-                <span>Search: </span>
-                <Input
-                    value={globalFilter}
-                    onChange={(e) => setGlobalFilter(e.target.value)}
-                    className="max-w-sm"
-                />
-            </div>
+                {/* Filtre global */}
+                <div className="flex items-center py-4 space-x-4">
+                    <span>Search: </span>
+                    <Input
+                        value={globalFilter}
+                        onChange={(e) => setGlobalFilter(e.target.value)}
+                        className="max-w-sm bg-background"
+                    />
+                </div>
             </div>
 
             {/* Tableau */}
@@ -267,7 +239,7 @@ export function EmployeesTable() {
                             <TableRow key={hg.id}>
                                 {hg.headers.map((header) => (
                                     <TableHead key={header.id}
-                                               className={header.column.getIsSorted() ? "bg-foreground text-background" : ""}>
+                                               className={header.column.getIsSorted() ? "bg-foreground text-background" : "bg-ring/20"}>
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(header.column.columnDef.header, header.getContext())}
@@ -281,7 +253,7 @@ export function EmployeesTable() {
                             table.getRowModel().rows.map((row) => (
                                 <TableRow key={row.id}>
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
+                                        <TableCell key={cell.id} className="bg-background text-foreground">
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}
@@ -289,7 +261,8 @@ export function EmployeesTable() {
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan={columns.length} className="h-24 text-center">
+                                <TableCell colSpan={columns.length}
+                                           className="h-24 text-center bg-background text-foreground">
                                     No results.
                                 </TableCell>
                             </TableRow>
@@ -299,7 +272,8 @@ export function EmployeesTable() {
             </div>
 
             {/* Pagination info */}
-            <div className="flex items-center justify-between py-4 text-sm text-muted-foreground">
+            <div
+                className="flex items-center justify-between py-4 text-sm text-muted-foreground">
                 <div>
                     {globalFilter
                         ? `Showing ${pageStart} to ${pageEnd} of ${filteredCount} entries (filtered from ${totalCount} total entries)`
@@ -315,7 +289,7 @@ export function EmployeesTable() {
                     >
                         Previous
                     </Button>
-                    {Array.from({ length: table.getPageCount() }, (_, i) => (
+                    {Array.from({length: table.getPageCount()}, (_, i) => (
                         <Button
                             key={i}
                             variant={i === pageIndex ? "default" : "outline"}

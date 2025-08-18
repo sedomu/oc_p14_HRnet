@@ -30,8 +30,8 @@ export function DatePicker({name}: DatePickerProps) {
                         id="date"
                         className="w-full justify-between font-normal"
                     >
-                        {date ? date.toLocaleDateString() : "Select date"}
-                        <ChevronDownIcon/>
+                        <span>{date ? date.toLocaleDateString() : ""}</span>
+                        <ChevronDownIcon />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto overflow-hidden p-0" align="end">
