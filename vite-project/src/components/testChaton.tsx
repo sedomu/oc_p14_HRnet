@@ -34,31 +34,33 @@ import {
 } from "@/components/ui/select"
 
 import type {Employee} from "@/redux.ts";
+import {useSelector} from "react-redux";
+import type {RootState} from "@/redux.ts"
 
-const employees: Employee[] = [
-    {
-        firstName: "John",
-        lastName: "Doe",
-        dateOfBirth: "1990-01-01",
-        startDate: "2023-01-01",
-        street: "123 Main St",
-        city: "Anytown",
-        state: "CA",
-        zipCode: 12345,
-        department: "Engineering",
-    },
-    {
-        firstName: "Seb",
-        lastName: "Seg",
-        dateOfBirth: "1994-12-12",
-        startDate: "2025-04-24",
-        street: "456 Second St",
-        city: "Everytown",
-        state: "ME",
-        zipCode: 54321,
-        department: "Legal",
-    },
-]
+// const employees: Employee[] = [
+//     {
+//         firstName: "John",
+//         lastName: "Doe",
+//         dateOfBirth: "1990-01-01",
+//         startDate: "2023-01-01",
+//         street: "123 Main St",
+//         city: "Anytown",
+//         state: "CA",
+//         zipCode: 12345,
+//         department: "Engineering",
+//     },
+//     {
+//         firstName: "Seb",
+//         lastName: "Seg",
+//         dateOfBirth: "1994-12-12",
+//         startDate: "2025-04-24",
+//         street: "456 Second St",
+//         city: "Everytown",
+//         state: "ME",
+//         zipCode: 54321,
+//         department: "Legal",
+//     },
+// ]
 
 // ---- Sorting Icon ----
 const getSortingIcon = (column: Column<Employee>) => {
@@ -198,6 +200,8 @@ const globalContains: FilterFn<Employee> = (row, columnId, filterValue) => {
 export function EmployeesTable() {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [globalFilter, setGlobalFilter] = React.useState("")
+
+    const employees = useSelector((state: RootState) => state.employees)
 
     const table = useReactTable({
         data: employees,

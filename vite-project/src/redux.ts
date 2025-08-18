@@ -29,3 +29,5 @@ export const store = configureStore({
 })
 
 export const { addEmployee } = employeesSlice.actions
+
+export type RootState = ReturnType<typeof store.getState>;
