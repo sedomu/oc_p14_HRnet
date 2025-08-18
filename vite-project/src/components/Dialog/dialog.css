@@ -1,0 +1,71 @@
+.tiny-react-dialog__overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    background-color: oklch(0.215 0 0 / 0.5);
+}
+
+.tiny-react-dialog__container {
+    background-color: oklch(0.995 0 0);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 51;
+    display: grid;
+    width: 100%;
+    max-width: calc(100% - 2rem);
+    transform: translate(-50%, -50%);
+    gap: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid oklch(0.927 0 0);
+    padding: 1.5rem;
+    box-shadow:
+            0 10px 15px -3px oklch(0 0 0 / 0.1),
+            0 4px 6px -2px oklch(0 0 0 / 0.05);
+}
+
+.tiny-react-dialog__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.tiny-react-dialog__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border-radius: 0.125rem;
+    opacity: 0.7;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.tiny-react-dialog__close:hover {
+    opacity: 1;
+}
+
+.tiny-react-dialog__close:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px oklch(0.708 0 0);
+    outline-offset: 2px;
+}
+
+.tiny-react-dialog__close svg {
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+    .tiny-react-dialog__container {
+        max-width: 425px;
+    }
+
+    .tiny-react-dialog__content {
+        text-align: left;
+    }
+}

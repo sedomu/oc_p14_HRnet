@@ -2,6 +2,7 @@ import { GalleryVerticalEnd } from "lucide-react"
 
 import { Form } from "@/components/Form.tsx"
 import {EmployeesTable} from "@/components/testChaton.tsx";
+import Dialog from "@/components/Dialog/Dialog.tsx";
 
 export default function LoginPage() {
 
@@ -46,7 +47,7 @@ export default function LoginPage() {
 
         </div>
 
-
+<Dialog />
     </>
     )
 }
