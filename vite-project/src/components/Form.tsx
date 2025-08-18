@@ -17,7 +17,7 @@ import {addEmployee, type Employee} from "@/redux.ts";
 
 type formProps = {
     className?: string;
-    onSuccess?: () => void;
+    onSuccess: () => void;
 }
 
 function formDataToEmployee(formData: FormData): Employee | null {
@@ -341,7 +341,10 @@ export function Form({ className, onSuccess }: formProps) {
 
         dispatch(addEmployee(data));
 
-        onSuccess?.();
+        onSuccess();
+
+
+
     }
 
     return (
