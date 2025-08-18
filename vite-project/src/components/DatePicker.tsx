@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import {ChevronDownIcon} from "lucide-react"
 
@@ -16,9 +14,15 @@ export function DatePicker({name}: DatePickerProps) {
     const [open, setOpen] = React.useState(false)
     const [date, setDate] = React.useState<Date | undefined>(undefined)
 
-    return (<>
+    const toISODateString = (date: Date) => {
+        const year = String(date.getFullYear());
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
 
+        return `${year}-${month}-${day}`;
+    }
 
+    return <>
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
@@ -44,12 +48,6 @@ export function DatePicker({name}: DatePickerProps) {
                 </PopoverContent>
             </Popover>
             <input type="hidden" name={name}
-                   value={date ? date.toLocaleDateString("en-US", {
-                       year: 'numeric',
-                       month: '2-digit',
-                       day: '2-digit'
-                   }) : ""}/>
+                   value={date ? toISODateString(date) : ""}/>
         </>
-
-    )
 }
