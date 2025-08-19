@@ -1,8 +1,5 @@
 import * as React from "react";
 import {
-    type Column,
-    type ColumnDef,
-    type FilterFn,
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
@@ -11,7 +8,6 @@ import {
     type SortingState,
     useReactTable,
 } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,179 +27,27 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 
-import type { Employee, RootState } from "@/redux.ts";
+import type { RootState } from "@/redux.ts";
 import { useSelector } from "react-redux";
 
-// ---- Sorting Icon ----
-const getSortingIcon = (column: Column<Employee>) => {
-    switch (column.getIsSorted()) {
-        case "asc":
-            return <ArrowDown className="ml-2 h-4 w-4" />;
-        case "desc":
-            return <ArrowUp className="ml-2 h-4 w-4" />;
-        default:
-            return <ArrowUpDown className="ml-2 h-4 w-4" />;
-    }
-};
+import getColumns from "@/components/Table/getColumns.tsx";
 
-// ---- Colonnes ----
-const columns: ColumnDef<Employee>[] = [
-    {
-        accessorKey: "firstName",
-        header: ({ column }) => (
-            <Button
-                variant={"ghost"}
-                className="bg-transparent hover:bg-transparent hover:text-inherit"
-                onClick={() =>
-                    column.toggleSorting(column.getIsSorted() === "asc")
-                }
-            >
-                First Name
-                {getSortingIcon(column)}
-            </Button>
-        ),
-    },
-    {
-        accessorKey: "lastName",
-        header: ({ column }) => (
-            <Button
-                variant={"ghost"}
-                className="bg-transparent hover:bg-transparent hover:text-inherit"
-                onClick={() =>
-                    column.toggleSorting(column.getIsSorted() === "asc")
-                }
-            >
-                Last Name
-                {getSortingIcon(column)}
-            </Button>
-        ),
-    },
-    {
-        accessorKey: "dateOfBirth",
-        header: ({ column }) => (
-            <Button
-                variant={"ghost"}
-                className="bg-transparent hover:bg-transparent hover:text-inherit"
-                onClick={() =>
-                    column.toggleSorting(column.getIsSorted() === "asc")
-                }
-            >
-                Date of Birth
-                {getSortingIcon(column)}
-            </Button>
-        ),
-        cell: ({ row }) => (
-            <span>
-                {new Date(row.getValue("dateOfBirth")).toLocaleDateString()}
-            </span>
-        ),
-    },
-    {
-        accessorKey: "startDate",
-        header: ({ column }) => (
-            <Button
-                variant={"ghost"}
-                className="bg-transparent hover:bg-transparent hover:text-inherit"
-                onClick={() =>
-                    column.toggleSorting(column.getIsSorted() === "asc")
-                }
-            >
-                Start Date
-                {getSortingIcon(column)}
-            </Button>
-        ),
-        cell: ({ row }) => (
-            <span>
-                {new Date(row.getValue("startDate")).toLocaleDateString()}
-            </span>
-        ),
-    },
-    {
-        accessorKey: "department",
-        header: ({ column }) => (
-            <Button
-                variant={"ghost"}
-                className="bg-transparent hover:bg-transparent hover:text-inherit"
-                onClick={() =>
-                    column.toggleSorting(column.getIsSorted() === "asc")
-                }
-            >
-                Department
-                {getSortingIcon(column)}
-            </Button>
-        ),
-    },
-    {
-        accessorKey: "city",
-        header: ({ column }) => (
-            <Button
-                variant={"ghost"}
-                className="bg-transparent hover:bg-transparent hover:text-inherit"
-                onClick={() =>
-                    column.toggleSorting(column.getIsSorted() === "asc")
-                }
-            >
-                City
-                {getSortingIcon(column)}
-            </Button>
-        ),
-    },
-    {
-        accessorKey: "state",
-        header: ({ column }) => (
-            <Button
-                variant={"ghost"}
-                className="bg-transparent hover:bg-transparent hover:text-inherit"
-                onClick={() =>
-                    column.toggleSorting(column.getIsSorted() === "asc")
-                }
-            >
-                State
-                {getSortingIcon(column)}
-            </Button>
-        ),
-    },
-    {
-        accessorKey: "zipCode",
-        header: ({ column }) => (
-            <Button
-                variant={"ghost"}
-                className="bg-transparent hover:bg-transparent hover:text-inherit"
-                onClick={() =>
-                    column.toggleSorting(column.getIsSorted() === "asc")
-                }
-            >
-                Zip
-                {getSortingIcon(column)}
-            </Button>
-        ),
-    },
-];
-
-// ---- Filtre global ----
-const globalContains: FilterFn<Employee> = (row, columnId, filterValue) => {
-    const search = String(filterValue ?? "").toLowerCase();
-    if (!search) return true;
-    const value = row.getValue(columnId);
-    return String(value ?? "")
-        .toLowerCase()
-        .includes(search);
-};
+import { columnsDefinition } from "@/components/Table/columnsDefinition.ts";
+import { globalSearchFilter } from "@/components/Table/globalSearchFilter.ts";
 
 // ---- Table Component ----
 export function EmployeesTable() {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [globalFilter, setGlobalFilter] = React.useState("");
-
     const employees = useSelector((state: RootState) => state.employees);
 
     const table = useReactTable({
         data: employees,
-        columns,
+        columns: getColumns(columnsDefinition),
         state: { sorting, globalFilter },
         onSortingChange: setSorting,
         onGlobalFilterChange: setGlobalFilter,
-        globalFilterFn: globalContains,
+        globalFilterFn: globalSearchFilter,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
@@ -303,7 +147,7 @@ export function EmployeesTable() {
                         ) : (
                             <TableRow>
                                 <TableCell
-                                    colSpan={columns.length}
+                                    colSpan={columnsDefinition.length}
                                     className="h-24 text-center bg-background text-foreground"
                                 >
                                     No results.
