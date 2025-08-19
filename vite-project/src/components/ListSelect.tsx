@@ -4,31 +4,29 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 type Props = {
-    name: string,
+    name: string;
     options: {
-        name: string,
-        key: string,
-    }[]
-}
+        name: string;
+        key: string;
+    }[];
+};
 
-export function ListSelect({name, options}: Props) {
-
+export function ListSelect({ name, options }: Props) {
     return (
         <Select name={name}>
             <SelectTrigger className="w-full">
-                <SelectValue placeholder=""/>
+                <SelectValue placeholder="" />
             </SelectTrigger>
             <SelectContent>
-
                 {options.map((option) => (
-                    <SelectItem value={option.key}
-                                key={option.key}>{option.name}</SelectItem>
+                    <SelectItem value={option.key} key={option.key}>
+                        {option.name}
+                    </SelectItem>
                 ))}
-
             </SelectContent>
         </Select>
-    )
+    );
 }

@@ -1112,4 +1112,4 @@ export const employeesMockupData: Employee[] = [
         zipCode: 82164,
         department: "Legal",
     },
-]
+];

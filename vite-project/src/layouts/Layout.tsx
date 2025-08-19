@@ -1,4 +1,4 @@
-import {Outlet, useNavigate, Link} from "react-router-dom";
+import { Outlet, useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 export default function Layout() {
@@ -8,7 +8,10 @@ export default function Layout() {
 
     return (
         <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-            <Link to={"/"} className="flex items-center gap-2 self-center font-medium">
+            <Link
+                to={"/"}
+                className="flex items-center gap-2 self-center font-medium"
+            >
                 <img src="./logo.webp" alt="logo" className="size-30" />
             </Link>
 
@@ -29,8 +32,7 @@ export default function Layout() {
                 </Button>
             </nav>
 
-
             <Outlet />
         </div>
-    )
+    );
 }

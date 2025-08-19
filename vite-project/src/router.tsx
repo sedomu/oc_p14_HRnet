@@ -1,15 +1,18 @@
-import { createBrowserRouter } from 'react-router-dom'
-import Layout from './layouts/Layout.jsx'
+import { createBrowserRouter } from "react-router-dom";
+import Layout from "./layouts/Layout.jsx";
 import Home from "@/pages/Home.tsx";
-import {EmployeesTable} from "@/components/EmployeesTable.tsx";
+import { EmployeesTable } from "@/components/EmployeesTable.tsx";
 
 export const router = createBrowserRouter([
     {
-        path: '/',
+        path: "/",
         element: <Layout />,
         children: [
-            { path: '/', element: <Home />},
-            { path: "/employee-list", element: <EmployeesTable />}
-        ]
-    }
-])
+            { path: "/", element: <Home /> },
+            {
+                path: "/employee-list",
+                element: <EmployeesTable />,
+            },
+        ],
+    },
+]);
