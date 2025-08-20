@@ -1,6 +1,6 @@
-import baseColumn from "@/components/Table/baseColumnConfiguration.tsx";
+import baseColumn from "@/components/employeesTable/baseColumnConfiguration.tsx";
 
-import type { columnsDefinition } from "@/components/Table/columnsDefinition.ts";
+import type { columnsDefinition } from "@/components/employeesTable/columnsDefinition.ts";
 
 export default function getColumns(columnsDefinition: columnsDefinition) {
     return columnsDefinition.map((column) =>

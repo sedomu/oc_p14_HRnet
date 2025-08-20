@@ -30,12 +30,12 @@ import {
 import type { RootState } from "@/redux.ts";
 import { useSelector } from "react-redux";
 
-import getColumns from "@/components/Table/getColumns.tsx";
+import getColumns from "@/components/employeesTable/getColumns.tsx";
 
-import { columnsDefinition } from "@/components/Table/columnsDefinition.ts";
-import { globalSearchFilter } from "@/components/Table/globalSearchFilter.ts";
+import { columnsDefinition } from "@/components/employeesTable/columnsDefinition.ts";
+import { globalSearchFilter } from "@/components/employeesTable/globalSearchFilter.ts";
 
-// ---- Table Component ----
+// ---- employeesTable Component ----
 export function EmployeesTable() {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [globalFilter, setGlobalFilter] = React.useState("");
@@ -63,7 +63,7 @@ export function EmployeesTable() {
     const filteredCount = table.getFilteredRowModel().rows.length;
     const totalCount = employees.length;
 
-    return (
+    return <>
         <div className="w-full">
             <div className="flex items-center justify-between">
                 {/* Page size select */}
@@ -89,7 +89,7 @@ export function EmployeesTable() {
                     <span> entries</span>
                 </div>
 
-                {/* Filtre global */}
+                {/*  Global Filter */}
                 <div className="flex items-center py-4 space-x-4">
                     <span>Search: </span>
                     <Input
@@ -100,7 +100,7 @@ export function EmployeesTable() {
                 </div>
             </div>
 
-            {/* Tableau */}
+            {/* Table */}
             <div className="overflow-hidden rounded-md border">
                 <Table>
                     <TableHeader>
@@ -196,5 +196,5 @@ export function EmployeesTable() {
                 </div>
             </div>
         </div>
-    );
+    </>;
 }

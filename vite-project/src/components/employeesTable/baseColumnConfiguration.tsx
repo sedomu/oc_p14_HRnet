@@ -1,7 +1,7 @@
 import type { Column } from "@tanstack/react-table";
 import type { Employee } from "@/redux.ts";
 import { Button } from "@/components/ui/button.tsx";
-import { getSortingIcon } from "@/components/Table/getSortingIcon.tsx";
+import { getSortingIcon } from "@/components/employeesTable/getSortingIcon.tsx";
 
 export default function baseColumnConfiguration(
     accessorKey: string,

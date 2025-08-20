@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./layouts/Layout.jsx";
 import Home from "@/pages/Home.tsx";
-import { EmployeesTable } from "@/components/Table/EmployeesTable.tsx";
+import { EmployeesTable } from "@/components/employeesTable/EmployeesTable.tsx";
 
 export const router = createBrowserRouter([
     {
