@@ -5,14 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DatePicker } from "@/components/DatePicker.tsx";
 import { SelectDropdown } from "@/components/SelectDropdown.tsx";
-import type { FormEvent } from "react";
-import { useDispatch } from "react-redux";
-import { addEmployee } from "@/redux.ts";
-import formDataToEmployee from "@/components/form/formDataToEmployee.ts";
 import {
     departments,
     states,
 } from "@/components/form/selectDropdownConfiguration.ts";
+import handleSubmit from "@/components/form/handleSubmit.ts";
+import { useDispatch } from "react-redux";
 
 type formProps = {
     onSuccess: () => void;
@@ -21,24 +19,6 @@ type formProps = {
 export function Form({ onSuccess }: formProps) {
     const dispatch = useDispatch();
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget);
-        console.log(formData);
-
-        const data = formDataToEmployee(formData);
-
-        if (!data) {
-            console.error("Formulaire invalide");
-            return;
-        }
-
-        dispatch(addEmployee(data));
-
-        onSuccess();
-    };
-
     return (
         <div className={cn("flex flex-col gap-6")}>
             <Card>
@@ -46,7 +26,9 @@ export function Form({ onSuccess }: formProps) {
                     <CardTitle className="text-xl">Create Employee</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={handleSubmit}>
+                    <form
+                        onSubmit={(e) => handleSubmit(e, onSuccess, dispatch)}
+                    >
                         <div className="grid gap-6">
                             <div className="grid gap-6">
                                 <div className="grid gap-3">

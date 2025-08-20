@@ -6,11 +6,7 @@ import tseslint from "typescript-eslint";
 import { globalIgnores } from "eslint/config";
 
 export default tseslint.config([
-    globalIgnores([
-        "dist",
-        "coverage",
-        "src/components/ui",
-    ]),
+    globalIgnores(["dist", "coverage", "src/components/ui"]),
     {
         files: ["**/*.{ts,tsx}"],
         extends: [
