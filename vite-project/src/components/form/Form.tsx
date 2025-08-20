@@ -15,17 +15,18 @@ import {
 } from "@/components/form/selectDropdownConfiguration.ts";
 
 type formProps = {
-    className?: string;
     onSuccess: () => void;
 };
 
-export function Form({ className, onSuccess }: formProps) {
+export function Form({ onSuccess }: formProps) {
     const dispatch = useDispatch();
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
+        console.log(formData);
+
         const data = formDataToEmployee(formData);
 
         if (!data) {
@@ -39,7 +40,7 @@ export function Form({ className, onSuccess }: formProps) {
     };
 
     return (
-        <div className={cn("flex flex-col gap-6", className)}>
+        <div className={cn("flex flex-col gap-6")}>
             <Card>
                 <CardHeader className="text-center">
                     <CardTitle className="text-xl">Create Employee</CardTitle>
@@ -74,13 +75,19 @@ export function Form({ className, onSuccess }: formProps) {
                                     <Label htmlFor="dateOfBirth">
                                         Date of Birth
                                     </Label>
-                                    <DatePicker name="dateOfBirth" />
+                                    <DatePicker
+                                        name="dateOfBirth"
+                                        dataTestId="dateOfBirth"
+                                    />
                                 </div>
                                 <div className="grid gap-3">
                                     <Label htmlFor="startDate">
                                         Start Date
                                     </Label>
-                                    <DatePicker name="startDate" />
+                                    <DatePicker
+                                        name="startDate"
+                                        dataTestId="startDate"
+                                    />
                                 </div>
                                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                                     <span className="bg-card text-muted-foreground relative z-10 px-2">

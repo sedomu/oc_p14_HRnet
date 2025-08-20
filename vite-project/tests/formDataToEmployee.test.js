@@ -26,4 +26,40 @@ describe("formDataToEmployee", () => {
         expect(employee.zipCode).toBe(12345);
         expect(employee.department).toBe("Sales");
     });
+
+    it("should return null if formData is empty", () => {
+        const employee = formDataToEmployee(new FormData());
+        expect(employee).toBe(null);
+    });
+
+    it("should return null if formData is incomplete", () => {
+        let formData = new FormData();
+        formData.append("firstName", "John");
+        formData.append("lastName", "Doe");
+        formData.append("dateOfBirth", "2000-01-01");
+        formData.append("startDate", "2022-01-01");
+        formData.append("street", "123 Main street");
+        formData.append("city", "Anytown");
+        formData.append("state", "NY");
+        formData.append("zipCode", "12345");
+        // "department" is missing
+
+        const employee = formDataToEmployee(formData);
+        expect(employee).toBe(null);
+    });
+
+    it("should return null if zipCode is not a number", () => {
+        let formData = new FormData();
+        formData.append("firstName", "John");
+        formData.append("lastName", "Doe");
+        formData.append("dateOfBirth", "2000-01-01");
+        formData.append("startDate", "2022-01-01");
+        formData.append("street", "123 Main street");
+        formData.append("city", "Anytown");
+        formData.append("state", "NY");
+        formData.append("zipCode", "abc");
+        formData.append("department", "Sales");
+        const employee = formDataToEmployee(formData);
+        expect(employee).toBe(null);
+    });
 });

@@ -12,9 +12,10 @@ import {
 
 type DatePickerProps = {
     name: string;
+    dataTestId: string;
 };
 
-export function DatePicker({ name }: DatePickerProps) {
+export function DatePicker({ name, dataTestId }: DatePickerProps) {
     const [open, setOpen] = React.useState(false);
     const [date, setDate] = React.useState<Date | undefined>(undefined);
 
@@ -58,6 +59,7 @@ export function DatePicker({ name }: DatePickerProps) {
                 type="hidden"
                 name={name}
                 value={date ? toISODateString(date) : ""}
+                data-testid={dataTestId}
             />
         </>
     );
