@@ -4,327 +4,28 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DatePicker } from "@/components/DatePicker.tsx";
-import { ListSelect } from "@/components/ListSelect.tsx";
+import { SelectDropdown } from "@/components/SelectDropdown.tsx";
 import type { FormEvent } from "react";
 import { useDispatch } from "react-redux";
-import { addEmployee, type Employee } from "@/redux.ts";
+import { addEmployee } from "@/redux.ts";
+import formDataToEmployee from "@/components/form/formDataToEmployee.ts";
+import {
+    departments,
+    states,
+} from "@/components/form/selectDropdownConfiguration.ts";
 
 type formProps = {
     className?: string;
     onSuccess: () => void;
 };
 
-function formDataToEmployee(formData: FormData): Employee | null {
-    const firstName = formData.get("firstName")?.toString();
-    const lastName = formData.get("lastName")?.toString();
-    const dateOfBirth = formData.get("dateOfBirth")?.toString();
-    const startDate = formData.get("startDate")?.toString();
-    const street = formData.get("street")?.toString();
-    const city = formData.get("city")?.toString();
-    const state = formData.get("state")?.toString();
-    const zipCodeStr = formData.get("zipCode")?.toString();
-    const department = formData.get("department")?.toString();
-
-    // Vérification des champs obligatoires
-    if (
-        !firstName ||
-        !lastName ||
-        !dateOfBirth ||
-        !startDate ||
-        !street ||
-        !city ||
-        !state ||
-        !zipCodeStr ||
-        !department
-    ) {
-        return null;
-    }
-
-    const zipCode = Number(zipCodeStr);
-    if (Number.isNaN(zipCode)) return null;
-
-    return {
-        firstName,
-        lastName,
-        dateOfBirth,
-        startDate,
-        street,
-        city,
-        state,
-        zipCode,
-        department,
-    };
-}
-
 export function Form({ className, onSuccess }: formProps) {
-    const states = [
-        {
-            name: "Alabama",
-            key: "AL",
-        },
-        {
-            name: "Alaska",
-            key: "AK",
-        },
-        {
-            name: "American Samoa",
-            key: "AS",
-        },
-        {
-            name: "Arizona",
-            key: "AZ",
-        },
-        {
-            name: "Arkansas",
-            key: "AR",
-        },
-        {
-            name: "California",
-            key: "CA",
-        },
-        {
-            name: "Colorado",
-            key: "CO",
-        },
-        {
-            name: "Connecticut",
-            key: "CT",
-        },
-        {
-            name: "Delaware",
-            key: "DE",
-        },
-        {
-            name: "District Of Columbia",
-            key: "DC",
-        },
-        {
-            name: "Federated States Of Micronesia",
-            key: "FM",
-        },
-        {
-            name: "Florida",
-            key: "FL",
-        },
-        {
-            name: "Georgia",
-            key: "GA",
-        },
-        {
-            name: "Guam",
-            key: "GU",
-        },
-        {
-            name: "Hawaii",
-            key: "HI",
-        },
-        {
-            name: "Idaho",
-            key: "ID",
-        },
-        {
-            name: "Illinois",
-            key: "IL",
-        },
-        {
-            name: "Indiana",
-            key: "IN",
-        },
-        {
-            name: "Iowa",
-            key: "IA",
-        },
-        {
-            name: "Kansas",
-            key: "KS",
-        },
-        {
-            name: "Kentucky",
-            key: "KY",
-        },
-        {
-            name: "Louisiana",
-            key: "LA",
-        },
-        {
-            name: "Maine",
-            key: "ME",
-        },
-        {
-            name: "Marshall Islands",
-            key: "MH",
-        },
-        {
-            name: "Maryland",
-            key: "MD",
-        },
-        {
-            name: "Massachusetts",
-            key: "MA",
-        },
-        {
-            name: "Michigan",
-            key: "MI",
-        },
-        {
-            name: "Minnesota",
-            key: "MN",
-        },
-        {
-            name: "Mississippi",
-            key: "MS",
-        },
-        {
-            name: "Missouri",
-            key: "MO",
-        },
-        {
-            name: "Montana",
-            key: "MT",
-        },
-        {
-            name: "Nebraska",
-            key: "NE",
-        },
-        {
-            name: "Nevada",
-            key: "NV",
-        },
-        {
-            name: "New Hampshire",
-            key: "NH",
-        },
-        {
-            name: "New Jersey",
-            key: "NJ",
-        },
-        {
-            name: "New Mexico",
-            key: "NM",
-        },
-        {
-            name: "New York",
-            key: "NY",
-        },
-        {
-            name: "North Carolina",
-            key: "NC",
-        },
-        {
-            name: "North Dakota",
-            key: "ND",
-        },
-        {
-            name: "Northern Mariana Islands",
-            key: "MP",
-        },
-        {
-            name: "Ohio",
-            key: "OH",
-        },
-        {
-            name: "Oklahoma",
-            key: "OK",
-        },
-        {
-            name: "Oregon",
-            key: "OR",
-        },
-        {
-            name: "Palau",
-            key: "PW",
-        },
-        {
-            name: "Pennsylvania",
-            key: "PA",
-        },
-        {
-            name: "Puerto Rico",
-            key: "PR",
-        },
-        {
-            name: "Rhode Island",
-            key: "RI",
-        },
-        {
-            name: "South Carolina",
-            key: "SC",
-        },
-        {
-            name: "South Dakota",
-            key: "SD",
-        },
-        {
-            name: "Tennessee",
-            key: "TN",
-        },
-        {
-            name: "Texas",
-            key: "TX",
-        },
-        {
-            name: "Utah",
-            key: "UT",
-        },
-        {
-            name: "Vermont",
-            key: "VT",
-        },
-        {
-            name: "Virgin Islands",
-            key: "VI",
-        },
-        {
-            name: "Virginia",
-            key: "VA",
-        },
-        {
-            name: "Washington",
-            key: "WA",
-        },
-        {
-            name: "West Virginia",
-            key: "WV",
-        },
-        {
-            name: "Wisconsin",
-            key: "WI",
-        },
-        {
-            name: "Wyoming",
-            key: "WY",
-        },
-    ];
-    const departments = [
-        {
-            name: "Sales",
-            key: "Sales",
-        },
-        {
-            name: "Marketing",
-            key: "Marketing",
-        },
-        {
-            name: "Engineering",
-            key: "Engineering",
-        },
-        {
-            name: "Human Resources",
-            key: "Human Resources",
-        },
-        {
-            name: "Legal",
-            key: "Legal",
-        },
-    ];
-
     const dispatch = useDispatch();
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
-
         const data = formDataToEmployee(formData);
 
         if (!data) {
@@ -411,7 +112,10 @@ export function Form({ className, onSuccess }: formProps) {
 
                                 <div className="grid gap-3">
                                     <Label htmlFor="state">State</Label>
-                                    <ListSelect name="state" options={states} />
+                                    <SelectDropdown
+                                        name="state"
+                                        options={states}
+                                    />
                                 </div>
 
                                 <div className="grid gap-3">
@@ -437,7 +141,7 @@ export function Form({ className, onSuccess }: formProps) {
                                     <Label htmlFor="department">
                                         Department
                                     </Label>
-                                    <ListSelect
+                                    <SelectDropdown
                                         name="department"
                                         options={departments}
                                     />

@@ -1,4 +1,4 @@
-import { Form } from "@/components/Form.tsx";
+import { Form } from "@/components/form/Form.tsx";
 import { useState } from "react";
 import { TinyReactDialog } from "tiny-react-dialog";
 

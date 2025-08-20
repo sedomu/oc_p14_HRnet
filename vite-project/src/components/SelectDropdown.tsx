@@ -14,7 +14,7 @@ type Props = {
     }[];
 };
 
-export function ListSelect({ name, options }: Props) {
+export function SelectDropdown({ name, options }: Props) {
     return (
         <Select name={name}>
             <SelectTrigger className="w-full">
