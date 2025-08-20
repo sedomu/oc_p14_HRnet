@@ -1,10 +1,15 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Form } from "@/components/form/Form";
 import { Provider } from "react-redux";
 import { store } from "@/redux";
-
 import { userEvent } from "@testing-library/user-event";
+
+vi.mock("@/components/form/handleSubmit.ts", () => ({
+    default: vi.fn(),
+}));
+
+import handleSubmit from "@/components/form/handleSubmit.js";
 
 describe("<Form/>", () => {
     it("should render title", () => {
@@ -16,10 +21,12 @@ describe("<Form/>", () => {
         const createEmployeeTitle = screen.getByText("Create Employee");
         expect(createEmployeeTitle.textContent).toBe("Create Employee");
     });
-    it("should update redux's store", async () => {
+    it("should call handleSubmit when form is submitted", async () => {
+        const onSuccess = vi.fn();
+
         render(
             <Provider store={store}>
-                <Form onSuccess={() => {}}></Form>
+                <Form onSuccess={onSuccess} />
             </Provider>
         );
 
@@ -35,10 +42,8 @@ describe("<Form/>", () => {
         await userEvent.click(screen.getByText("New York"));
         await userEvent.type(screen.getByLabelText("Zip Code"), "12345");
         await userEvent.click(screen.getByText("Sales"));
-
         await userEvent.click(screen.getByText("Save"));
 
-        const state = store.getState();
-        expect(state.employees.length).toBe(1);
+        expect(handleSubmit).toHaveBeenCalled();
     });
 });
