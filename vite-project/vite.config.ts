@@ -15,6 +15,7 @@ export default defineConfig({
                 "**/*.config.{js,ts}",
                 "dist/**",
                 "**/*.d.ts",
+                "src/main.tsx", // main is just the entry point for the router which is tested
             ],
         },
     },
