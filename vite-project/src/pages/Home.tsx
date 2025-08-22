@@ -1,6 +1,7 @@
 import { Form } from "@/components/form/Form.tsx";
 import { useState } from "react";
 import { TinyReactDialog } from "tiny-react-dialog";
+import "tiny-react-dialog/index.css";
 
 export default function Home() {
     const [isDialogVisible, setIsDialogVisible] = useState(false);
