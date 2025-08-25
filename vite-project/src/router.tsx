@@ -3,9 +3,7 @@ import Layout from "./layouts/Layout.jsx";
 import Home from "@/pages/Home.tsx";
 import { lazy, Suspense } from "react";
 
-const EmployeesList = lazy(
-    () => import("@/pages/EmployeesList.tsx")
-);
+const EmployeesList = lazy(() => import("@/pages/EmployeesList.tsx"));
 
 const LazyEmployeesList = (
     <Suspense fallback={<div>Employees table is loading...</div>}>

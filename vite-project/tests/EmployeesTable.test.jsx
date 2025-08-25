@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "@/redux.ts";
-import { EmployeesTable } from "@/components/employeesTable/EmployeesTable.tsx";
+import EmployeesList from "@/pages/EmployeesList.tsx";
 
 vi.mock("@/config.ts", () => ({
     MOCKUP_DATA: true,
@@ -17,7 +17,7 @@ describe("EmployeesTable", () => {
     it("should render correctly with project's mockup data", () => {
         const { container } = render(
             <Provider store={store}>
-                <EmployeesTable />
+                <EmployeesList />
             </Provider>
         );
 

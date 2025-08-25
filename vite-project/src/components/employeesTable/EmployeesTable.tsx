@@ -76,7 +76,10 @@ export default function EmployeesTable() {
                                 table.setPageSize(Number(value))
                             }
                         >
-                            <SelectTrigger className="w-20 bg-background" aria-label="Select the page size">
+                            <SelectTrigger
+                                className="w-20 bg-background"
+                                aria-label="Select the page size"
+                            >
                                 <SelectValue placeholder="Page size" />
                             </SelectTrigger>
                             <SelectContent>
