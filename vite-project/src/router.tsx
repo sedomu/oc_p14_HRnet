@@ -3,13 +3,13 @@ import Layout from "./layouts/Layout.jsx";
 import Home from "@/pages/Home.tsx";
 import { lazy, Suspense } from "react";
 
-const EmployeesTable = lazy(
-    () => import("@/components/employeesTable/EmployeesTable.tsx")
+const EmployeesList = lazy(
+    () => import("@/pages/EmployeesList.tsx")
 );
 
-const LazyEmployeesTable = (
+const LazyEmployeesList = (
     <Suspense fallback={<div>Employees table is loading...</div>}>
-        <EmployeesTable />
+        <EmployeesList />
     </Suspense>
 );
 
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
             { path: "/", element: <Home /> },
             {
                 path: "/employee-list",
-                element: LazyEmployeesTable,
+                element: LazyEmployeesList,
             },
         ],
     },

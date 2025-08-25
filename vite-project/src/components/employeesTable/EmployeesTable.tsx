@@ -76,7 +76,7 @@ export default function EmployeesTable() {
                                 table.setPageSize(Number(value))
                             }
                         >
-                            <SelectTrigger className="w-20 bg-background">
+                            <SelectTrigger className="w-20 bg-background" aria-label="Select the page size">
                                 <SelectValue placeholder="Page size" />
                             </SelectTrigger>
                             <SelectContent>
@@ -92,11 +92,12 @@ export default function EmployeesTable() {
 
                     {/*  Global Filter */}
                     <div className="flex items-center py-4 space-x-4">
-                        <span>Search: </span>
+                        <label htmlFor="global-search">Search: </label>
                         <Input
                             value={globalFilter}
                             onChange={(e) => setGlobalFilter(e.target.value)}
                             className="max-w-sm bg-background"
+                            id="global-search"
                         />
                     </div>
                 </div>
@@ -160,7 +161,7 @@ export default function EmployeesTable() {
                 </div>
 
                 {/* Pagination info */}
-                <div className="flex items-center justify-between py-4 text-sm text-muted-foreground">
+                <div className="flex items-center justify-between py-4 text-sm text-foreground">
                     <div>
                         {globalFilter
                             ? `Showing ${pageStart} to ${pageEnd} of ${filteredCount} entries (filtered from ${totalCount} total entries)`
