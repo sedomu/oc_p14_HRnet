@@ -36,7 +36,7 @@ import { columnsDefinition } from "@/components/employeesTable/columnsDefinition
 import { globalSearchFilter } from "@/components/employeesTable/globalSearchFilter.ts";
 
 // ---- employeesTable Component ----
-export function EmployeesTable() {
+export default function EmployeesTable() {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [globalFilter, setGlobalFilter] = React.useState("");
     const employees = useSelector((state: RootState) => state.employees);

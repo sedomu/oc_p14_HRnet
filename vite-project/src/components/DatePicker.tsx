@@ -13,9 +13,10 @@ import {
 type DatePickerProps = {
     name: string;
     dataTestId: string;
+    ariaLabel: string;
 };
 
-export function DatePicker({ name, dataTestId }: DatePickerProps) {
+export function DatePicker({ name, dataTestId, ariaLabel }: DatePickerProps) {
     const [open, setOpen] = React.useState(false);
     const [date, setDate] = React.useState<Date | undefined>(undefined);
 
@@ -35,6 +36,8 @@ export function DatePicker({ name, dataTestId }: DatePickerProps) {
                         variant="outline"
                         id="date"
                         className="w-full justify-between font-normal"
+                        role="button"
+                        aria-label={ariaLabel}
                     >
                         <span>{date ? date.toLocaleDateString() : ""}</span>
                         <ChevronDownIcon />

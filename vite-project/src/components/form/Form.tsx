@@ -60,6 +60,7 @@ export function Form({ onSuccess }: formProps) {
                                     <DatePicker
                                         name="dateOfBirth"
                                         dataTestId="dateOfBirth"
+                                        ariaLabel="Select your date of birth"
                                     />
                                 </div>
                                 <div className="grid gap-3">
@@ -69,6 +70,7 @@ export function Form({ onSuccess }: formProps) {
                                     <DatePicker
                                         name="startDate"
                                         dataTestId="startDate"
+                                        ariaLabel="Select your start date"
                                     />
                                 </div>
                                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
@@ -104,6 +106,7 @@ export function Form({ onSuccess }: formProps) {
                                     <SelectDropdown
                                         name="state"
                                         options={states}
+                                        ariaLabel="select your state"
                                     />
                                 </div>
 
@@ -133,6 +136,7 @@ export function Form({ onSuccess }: formProps) {
                                     <SelectDropdown
                                         name="department"
                                         options={departments}
+                                        ariaLabel="select your department"
                                     />
                                 </div>
 

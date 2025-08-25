@@ -12,12 +12,13 @@ type Props = {
         name: string;
         key: string;
     }[];
+    ariaLabel: string;
 };
 
-export function SelectDropdown({ name, options }: Props) {
+export function SelectDropdown({ name, options, ariaLabel }: Props) {
     return (
         <Select name={name}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full" aria-label={ariaLabel}>
                 <SelectValue placeholder="" />
             </SelectTrigger>
             <SelectContent>
