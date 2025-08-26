@@ -3,9 +3,12 @@ module.exports = {
         collect: {
             startServerCommand: "npm run build && npm run preview",
             url: ["http://localhost:4173"],
+            numberOfRuns: 1,
         },
         upload: {
-            target: "temporary-public-storage",
+            target: "filesystem",
+            outputDir: "lighthouse-reports",
+            reportFilename: "report.%%EXTENSION%%",
         },
     },
 };
