@@ -7,8 +7,8 @@ module.exports = {
         },
         upload: {
             target: "filesystem",
-            outputDir: "lighthouse-reports",
-            reportFilename: "report.%%EXTENSION%%",
+            outputDir: "../lighthouse-reports",
+            reportFilenamePattern: "index.html",
         },
     },
 };
