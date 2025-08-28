@@ -1,4 +1,4 @@
-name: Build project, run Lighthouse CI and uploads Lighthouse report on GithHub Pages
+name: Build environment, run tests, build project, run Lighthouse CI and uploads Lighthouse report on GithHub Pages
 
 on: [push]
 
@@ -23,6 +23,11 @@ jobs:
         run: |
           cd vite-project
           npm ci
+
+      - name: Run tests with Vitest
+        run: |
+          cd vite-project
+          npm run test
 
       - name: run Lighthouse CI
         run: |
