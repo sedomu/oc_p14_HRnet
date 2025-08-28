@@ -1,4 +1,4 @@
-name: Build project and run Lighthouse CI
+name: Build project, run Lighthouse CI and uploads Lighthouse report on GithHub Pages
 
 on: [push]
 
