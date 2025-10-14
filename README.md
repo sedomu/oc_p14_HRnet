@@ -63,7 +63,7 @@ The migration includes:
     * Dropdown menus,
     * Data tables.
 
-   One plugin was fully rewritten and published as an **NPM package**:
+   One plugin was **fully rewritten and published as an NPM package**:
    👉 [`tiny-react-dialog`](https://www.npmjs.com/package/tiny-react-dialog)
 
    The remaining components are based on the **shadcn/ui** library, providing a consistent and modern interface.
@@ -78,6 +78,19 @@ The migration includes:
 
     * Technical documentation describing architecture, design decisions, and component APIs.
     * Lighthouse audit reports are **automatically generated and deployed to GitHub Pages**.
+
+---
+
+## ⚙️ Installation
+
+This project uses **Node.js v22+** (LTS recommended) and **Vite** for development.
+
+1. Clone the repository: `git clone https://github.com/sedomu/oc_p14_HRnet.git`
+2. Install dependencies: `cd ./vite-project` && `npm install`
+3. Start the development server: `npm run dev`
+4. Open `http://localhost:5173` in your browser.
+
+The production build is generated in the `dist/` folder after running `npm run build`.
 
 ---
 
@@ -125,6 +138,8 @@ You can view the results [here](https://sedomu.github.io/oc_p14_HRnet/).
 A **simple, lightweight, and customisable React library** for displaying modal dialog boxes.
 
 It replaces the old **jQuery modal plugin** used in HRnet, providing a modern, accessible, and reusable solution.
+
+This package was developed and maintained by myself as part of the HRnet migration. It is also published on NPM for potential reuse in other React projects.
 
 ### ✨ Features
 
