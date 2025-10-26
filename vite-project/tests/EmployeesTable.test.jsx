@@ -25,7 +25,9 @@ describe("EmployeesTable", () => {
             </Provider>
         );
 
-        await waitForElementToBeRemoved(() => screen.getByText("Employees table is loading..."));
+        await waitForElementToBeRemoved(() =>
+            screen.getByText("Employees table is loading...")
+        );
 
         expect(container).toMatchSnapshot();
     });
