@@ -13,11 +13,19 @@ type Props = {
         key: string;
     }[];
     ariaLabel: string;
+    value?: string;
+    onChange?: (value: string) => void;
 };
 
-export function SelectDropdown({ name, options, ariaLabel }: Props) {
+export function SelectDropdown({
+    name,
+    options,
+    ariaLabel,
+    value,
+    onChange,
+}: Props) {
     return (
-        <Select name={name}>
+        <Select name={name} value={value || ""} onValueChange={onChange}>
             <SelectTrigger className="w-full" aria-label={ariaLabel}>
                 <SelectValue placeholder="" />
             </SelectTrigger>

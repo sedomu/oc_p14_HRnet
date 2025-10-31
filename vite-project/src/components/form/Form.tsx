@@ -21,15 +21,19 @@ export function Form({ onSuccess }: formProps) {
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [dateOfBirth, setDateOfBirth] = useState<Date | undefined>(undefined);
     const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+    const [stateValue, setStateValue] = useState<string>("");
+    const [departmentValue, setDepartmentValue] = useState<string>("");
 
     const dispatch = useDispatch();
-    
-    const resetForm = (form: HTMLFormElement)=> {
+
+    const resetForm = (form: HTMLFormElement) => {
         form.reset();
         setDateOfBirth(undefined);
         setStartDate(undefined);
+        setStateValue("");
+        setDepartmentValue("");
         setErrors({});
-    }
+    };
 
     return (
         <div className={cn("flex flex-col gap-6")}>
@@ -40,7 +44,13 @@ export function Form({ onSuccess }: formProps) {
                 <CardContent>
                     <form
                         onSubmit={(e) =>
-                            handleSubmit(e, onSuccess, dispatch, setErrors, resetForm)
+                            handleSubmit(
+                                e,
+                                onSuccess,
+                                dispatch,
+                                setErrors,
+                                resetForm
+                            )
                         }
                     >
                         <div className="grid gap-6">
@@ -155,6 +165,8 @@ export function Form({ onSuccess }: formProps) {
                                         name="state"
                                         options={states}
                                         ariaLabel="select your state"
+                                        value={stateValue}
+                                        onChange={setStateValue}
                                     />
                                     {errors.state && (
                                         <p className="text-red-500 text-sm">
@@ -195,6 +207,8 @@ export function Form({ onSuccess }: formProps) {
                                         name="department"
                                         options={departments}
                                         ariaLabel="select your department"
+                                        value={departmentValue}
+                                        onChange={setDepartmentValue}
                                     />
                                     {errors.department && (
                                         <p className="text-red-500 text-sm">

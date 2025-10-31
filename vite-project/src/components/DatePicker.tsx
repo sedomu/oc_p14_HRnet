@@ -18,12 +18,18 @@ type DatePickerProps = {
     onChange?: (date: Date | undefined) => void;
 };
 
-export function DatePicker({ name, dataTestId, ariaLabel, value, onChange }: DatePickerProps) {
+export function DatePicker({
+    name,
+    dataTestId,
+    ariaLabel,
+    value,
+    onChange,
+}: DatePickerProps) {
     const [open, setOpen] = React.useState(false);
 
     const handleChange = (newDate: Date | undefined) => {
         onChange?.(newDate);
-    }
+    };
 
     const toISODateString = (date: Date) => {
         const year = String(date.getFullYear());

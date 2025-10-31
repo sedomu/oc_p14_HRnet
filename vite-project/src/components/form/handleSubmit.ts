@@ -8,7 +8,7 @@ export default function handleSubmit(
     onSuccess: () => void,
     dispatch: typeof store.dispatch,
     setErrors: (errors: Record<string, string>) => void,
-    resetForm: (form: HTMLFormElement) => void,
+    resetForm: (form: HTMLFormElement) => void
 ) {
     e.preventDefault();
 
