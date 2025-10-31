@@ -11,12 +11,15 @@ import {
 } from "@/components/form/selectDropdownConfiguration.ts";
 import handleSubmit from "@/components/form/handleSubmit.ts";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 type formProps = {
     onSuccess: () => void;
 };
 
 export function Form({ onSuccess }: formProps) {
+    const [errors, setErrors] = useState<Record<string, string>>({});
+
     const dispatch = useDispatch();
 
     return (
@@ -27,7 +30,7 @@ export function Form({ onSuccess }: formProps) {
                 </CardHeader>
                 <CardContent>
                     <form
-                        onSubmit={(e) => handleSubmit(e, onSuccess, dispatch)}
+                        onSubmit={(e) => handleSubmit(e, onSuccess, dispatch, setErrors)}
                     >
                         <div className="grid gap-6">
                             <div className="grid gap-6">
@@ -42,6 +45,11 @@ export function Form({ onSuccess }: formProps) {
                                         name="firstName"
                                         required
                                     />
+                                    {errors.firstName && (
+                                        <p className="text-red-500 text-sm">
+                                            {errors.firstName}
+                                        </p>
+                                    )}
                                 </div>
                                 <div className="grid gap-3">
                                     <Label htmlFor="lastName">Last Name</Label>
