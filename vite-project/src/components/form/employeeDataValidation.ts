@@ -39,8 +39,8 @@ export function employeeDataValidation(data: Employee) {
         errors.street = "Street must be at least 3 characters long";
     }
 
-    if (data.city.length < 1) {
-        errors.city = "City must be at least 1 character long";
+    if (data.city.length < 2) {
+        errors.city = "City must be at least 2 character long";
     }
 
     if (!states.some((state) => state.key === data.state)) {
