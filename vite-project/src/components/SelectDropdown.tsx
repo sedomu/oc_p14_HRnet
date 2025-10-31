@@ -25,11 +25,16 @@ export function SelectDropdown({
     onChange,
 }: Props) {
     return (
-        <Select name={name} value={value || ""} onValueChange={onChange}>
+        <Select
+            name={name}
+            value={value || "error_value"}
+            onValueChange={onChange}
+        >
             <SelectTrigger className="w-full" aria-label={ariaLabel}>
                 <SelectValue placeholder="" />
             </SelectTrigger>
             <SelectContent>
+                <SelectItem value="error_value" disabled></SelectItem>
                 {options.map((option) => (
                     <SelectItem value={option.key} key={option.key}>
                         {option.name}
