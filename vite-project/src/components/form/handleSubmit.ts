@@ -7,7 +7,8 @@ export default function handleSubmit(
     e: FormEvent<HTMLFormElement>,
     onSuccess: () => void,
     dispatch: typeof store.dispatch,
-    setErrors: (errors: Record<string, string>) => void
+    setErrors: (errors: Record<string, string>) => void,
+    resetForm: (form: HTMLFormElement) => void,
 ) {
     e.preventDefault();
 
@@ -22,8 +23,7 @@ export default function handleSubmit(
     }
 
     // reset form
-    setErrors({});
-    e.currentTarget.reset();
+    resetForm(e.currentTarget);
 
     dispatch(addEmployee(data));
 

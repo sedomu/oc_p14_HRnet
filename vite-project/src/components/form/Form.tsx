@@ -19,8 +19,17 @@ type formProps = {
 
 export function Form({ onSuccess }: formProps) {
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [dateOfBirth, setDateOfBirth] = useState<Date | undefined>(undefined);
+    const [startDate, setStartDate] = useState<Date | undefined>(undefined);
 
     const dispatch = useDispatch();
+    
+    const resetForm = (form: HTMLFormElement)=> {
+        form.reset();
+        setDateOfBirth(undefined);
+        setStartDate(undefined);
+        setErrors({});
+    }
 
     return (
         <div className={cn("flex flex-col gap-6")}>
@@ -31,7 +40,7 @@ export function Form({ onSuccess }: formProps) {
                 <CardContent>
                     <form
                         onSubmit={(e) =>
-                            handleSubmit(e, onSuccess, dispatch, setErrors)
+                            handleSubmit(e, onSuccess, dispatch, setErrors, resetForm)
                         }
                     >
                         <div className="grid gap-6">
@@ -76,6 +85,8 @@ export function Form({ onSuccess }: formProps) {
                                         name="dateOfBirth"
                                         dataTestId="dateOfBirth"
                                         ariaLabel="Select your date of birth"
+                                        value={dateOfBirth}
+                                        onChange={setDateOfBirth}
                                     />
                                     {errors.dateOfBirth && (
                                         <p className="text-red-500 text-sm">
@@ -91,6 +102,8 @@ export function Form({ onSuccess }: formProps) {
                                         name="startDate"
                                         dataTestId="startDate"
                                         ariaLabel="Select your start date"
+                                        value={startDate}
+                                        onChange={setStartDate}
                                     />
                                     {errors.startDate && (
                                         <p className="text-red-500 text-sm">

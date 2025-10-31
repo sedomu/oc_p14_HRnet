@@ -14,11 +14,16 @@ type DatePickerProps = {
     name: string;
     dataTestId: string;
     ariaLabel: string;
+    value?: Date | undefined;
+    onChange?: (date: Date | undefined) => void;
 };
 
-export function DatePicker({ name, dataTestId, ariaLabel }: DatePickerProps) {
+export function DatePicker({ name, dataTestId, ariaLabel, value, onChange }: DatePickerProps) {
     const [open, setOpen] = React.useState(false);
-    const [date, setDate] = React.useState<Date | undefined>(undefined);
+
+    const handleChange = (newDate: Date | undefined) => {
+        onChange?.(newDate);
+    }
 
     const toISODateString = (date: Date) => {
         const year = String(date.getFullYear());
@@ -39,7 +44,7 @@ export function DatePicker({ name, dataTestId, ariaLabel }: DatePickerProps) {
                         role="button"
                         aria-label={ariaLabel}
                     >
-                        <span>{date ? date.toLocaleDateString() : ""}</span>
+                        <span>{value ? value.toLocaleDateString() : ""}</span>
                         <ChevronDownIcon />
                     </Button>
                 </PopoverTrigger>
@@ -49,10 +54,10 @@ export function DatePicker({ name, dataTestId, ariaLabel }: DatePickerProps) {
                 >
                     <Calendar
                         mode="single"
-                        selected={date}
+                        selected={value}
                         captionLayout="dropdown"
                         onSelect={(date) => {
-                            setDate(date);
+                            handleChange(date);
                             setOpen(false);
                         }}
                     />
@@ -61,7 +66,7 @@ export function DatePicker({ name, dataTestId, ariaLabel }: DatePickerProps) {
             <input
                 type="hidden"
                 name={name}
-                value={date ? toISODateString(date) : ""}
+                value={value ? toISODateString(value) : ""}
                 data-testid={dataTestId}
             />
         </>
