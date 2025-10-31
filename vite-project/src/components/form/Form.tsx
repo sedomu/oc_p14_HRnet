@@ -30,7 +30,9 @@ export function Form({ onSuccess }: formProps) {
                 </CardHeader>
                 <CardContent>
                     <form
-                        onSubmit={(e) => handleSubmit(e, onSuccess, dispatch, setErrors)}
+                        onSubmit={(e) =>
+                            handleSubmit(e, onSuccess, dispatch, setErrors)
+                        }
                     >
                         <div className="grid gap-6">
                             <div className="grid gap-6">
@@ -60,6 +62,11 @@ export function Form({ onSuccess }: formProps) {
                                         name="lastName"
                                         required
                                     />
+                                    {errors.lastName && (
+                                        <p className="text-red-500 text-sm">
+                                            {errors.lastName}
+                                        </p>
+                                    )}
                                 </div>
                                 <div className="grid gap-3">
                                     <Label htmlFor="dateOfBirth">
@@ -70,6 +77,11 @@ export function Form({ onSuccess }: formProps) {
                                         dataTestId="dateOfBirth"
                                         ariaLabel="Select your date of birth"
                                     />
+                                    {errors.dateOfBirth && (
+                                        <p className="text-red-500 text-sm">
+                                            {errors.dateOfBirth}
+                                        </p>
+                                    )}
                                 </div>
                                 <div className="grid gap-3">
                                     <Label htmlFor="startDate">
@@ -80,6 +92,11 @@ export function Form({ onSuccess }: formProps) {
                                         dataTestId="startDate"
                                         ariaLabel="Select your start date"
                                     />
+                                    {errors.startDate && (
+                                        <p className="text-red-500 text-sm">
+                                            {errors.startDate}
+                                        </p>
+                                    )}
                                 </div>
                                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                                     <span className="bg-card text-muted-foreground relative z-10 px-2">
@@ -96,6 +113,11 @@ export function Form({ onSuccess }: formProps) {
                                         name="street"
                                         required
                                     />
+                                    {errors.street && (
+                                        <p className="text-red-500 text-sm">
+                                            {errors.street}
+                                        </p>
+                                    )}
                                 </div>
 
                                 <div className="grid gap-3">
@@ -107,6 +129,11 @@ export function Form({ onSuccess }: formProps) {
                                         name="city"
                                         required
                                     />
+                                    {errors.city && (
+                                        <p className="text-red-500 text-sm">
+                                            {errors.city}
+                                        </p>
+                                    )}
                                 </div>
 
                                 <div className="grid gap-3">
@@ -116,6 +143,11 @@ export function Form({ onSuccess }: formProps) {
                                         options={states}
                                         ariaLabel="select your state"
                                     />
+                                    {errors.state && (
+                                        <p className="text-red-500 text-sm">
+                                            {errors.state}
+                                        </p>
+                                    )}
                                 </div>
 
                                 <div className="grid gap-3">
@@ -133,6 +165,11 @@ export function Form({ onSuccess }: formProps) {
                                             MozAppearance: "textfield", // Firefox
                                         }}
                                     />
+                                    {errors.zipCode && (
+                                        <p className="text-red-500 text-sm">
+                                            {errors.zipCode}
+                                        </p>
+                                    )}
                                 </div>
 
                                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t"></div>
@@ -146,6 +183,11 @@ export function Form({ onSuccess }: formProps) {
                                         options={departments}
                                         ariaLabel="select your department"
                                     />
+                                    {errors.department && (
+                                        <p className="text-red-500 text-sm">
+                                            {errors.department}
+                                        </p>
+                                    )}
                                 </div>
 
                                 <Button type="submit" className="w-full">
