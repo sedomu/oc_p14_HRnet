@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
 import handleSubmit from "../src/components/form/handleSubmit.js";
-import { consoleErrorSpy } from "./setup.js";
 
 vi.mock("@/config.ts", () => ({
     MOCKUP_DATA: false,
@@ -9,17 +8,18 @@ vi.mock("@/config.ts", () => ({
 import { store } from "@/redux.js";
 
 describe("handleSubmit", () => {
-    it("should return void if no input", () => {
+    it("should set errors and not call onSuccess or dispatch if form is invalid", () => {
         const preventDefault = vi.fn();
         const data = new FormData();
         const event = { preventDefault, data };
+        const setErrors = vi.fn();
 
         const onSuccess = vi.fn();
         const dispatch = vi.fn();
 
-        handleSubmit(event, onSuccess, dispatch);
+        handleSubmit(event, onSuccess, dispatch, setErrors);
 
-        expect(consoleErrorSpy).toHaveBeenCalledWith("Formulaire invalide");
+        expect(setErrors).toHaveBeenCalled();
         expect(onSuccess).not.toHaveBeenCalled();
         expect(dispatch).not.toHaveBeenCalled();
     });
@@ -43,8 +43,10 @@ describe("handleSubmit", () => {
         };
 
         const onSuccess = vi.fn();
+        const setErrors = vi.fn();
+        const resetForm = vi.fn();
 
-        handleSubmit(event, onSuccess, store.dispatch);
+        handleSubmit(event, onSuccess, store.dispatch, setErrors, resetForm);
 
         const state = store.getState();
         expect(state.employees.length).toBe(1);
@@ -57,5 +59,8 @@ describe("handleSubmit", () => {
         expect(state.employees[0].state).toBe("NY");
         expect(String(state.employees[0].zipCode)).toBe("12345");
         expect(state.employees[0].department).toBe("Sales");
+        expect(onSuccess).toHaveBeenCalled();
+        expect(resetForm).toHaveBeenCalled();
+        expect(setErrors).not.toHaveBeenCalled();
     });
 });
